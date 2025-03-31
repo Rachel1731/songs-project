@@ -5,12 +5,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title>Music App</title>
   </head>
-  <body>
-    <h1>Welcome to the Music app!</h1>
-    <p>The app for your favorite instruments to sing together!</p>
-  </body>
+
+   <!-- index.ejs homepage -->
+
+ <body>
+  <h1>Welcome to the Music app!</h1>
+
+  <img
+    class="instrument-pic1"
+    //imgsrc//
+    alt="instrument"
+  />
+
+  <p>An app that lets you learn about music.</p>
+</body>
+
+   
+<a href="/music">Browse Music</a>
+
+<a href="/music/new">Play a New Song!</a>
+
+<a href="/music/">Back to Composers</a>
+
+<body>
+  <h1>Welcome to the Music app!</h1>
+  <p>The app for your favorite instruments to sing together!</p>
+  <ul>
+    <% songs.forEach(song => { %>
+      <li><a href="#"><%= song.name %></a></li>
+    <% }); %>
+  </ul>
+</body>
 </html>
 
 
