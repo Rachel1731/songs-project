@@ -1,0 +1,34 @@
+<!-- views/fruits/show.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title><%= fruit.name %></title> <!-- Dynamic title based on fruit name -->
+  </head>
+  <body>
+
+    <a href="/fruits/">Back to Fruits</a>
+
+    <h1><%= song.name %></h1>
+    <% if(song.isASong){ %>
+    <p>This is a Song</p>
+    <% } else { %>
+    <p>This is a Composer</p>
+    <% } %>
+  
+    <form action="/fruits/<%=songs._id%>?_method=DELETE" method="POST">
+        <button type="submit">Delete <%= song.name %></button>
+      </form>
+     
+      <a href="/songs/<%= songs._id %>/edit">Edit <%= song.name %></a>
+      <a href="/songs">Back to Songs</a>
+      
+    
+
+
+
+
+
