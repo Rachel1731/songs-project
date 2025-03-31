@@ -1,5 +1,3 @@
-// models/songs.js
-
 const mongoose = require('mongoose');
 
 const songsSchema = new mongoose.Schema({
@@ -7,10 +5,13 @@ const songsSchema = new mongoose.Schema({
   composer: String,
 });
 
-const Song = mongoose.model("Song", songsSchema); // create model
-
-// models/songs.js
+const Song = mongoose.model("Song", songsSchema); 
 
 module.exports = songs;
 
-mongoose.connect(process.env.MONGODB_URI);
+const songs = await Song.findIdAndUpdate('67e849177caaab3b7f68e442',
+{
+  song: 'Queen of the Night'
+  composer: 'Mozart'
+}
+)
