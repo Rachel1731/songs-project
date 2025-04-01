@@ -1,43 +1,32 @@
-<!-- views/index.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title>Music App</title>
-  </head>
-
-   <!-- index.ejs homepage -->
-
- <body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title>Music App</title>
+</head>
+<body>
   <h1>Welcome to the Music app!</h1>
 
   <img
-    class="instrument-pic1"
-    //imgsrc//
-    alt="instrument"
-  />
+  class="Music-2048x1364"
+  src="Music-2048x1364.jpg"
+  alt="colorful music notes"
 
-  <p>An app that lets you learn about music.</p>
-</body>
-
-   
-<a href="/music">Browse Music</a>
-
-<a href="/music/new">Play a New Song!</a>
-
-<a href="/music/">Back to Composers</a>
-
-<body>
-  <h1>Welcome to the Music app!</h1>
-  <p>The app for your favorite instruments to sing together!</p>
+  
   <ul>
-    <% songs.forEach(song => { %>
-      <li><a href="#"><%= song.name %></a></li>
-    <% }); %>
+    <%songs.forEach((song)=>{ %>
+     <li>
+      <a href="/songs/<%songs._id%>">
+        <%songs._id%>/li><%
+        </a>
+        </li>
+<% }) %>
   </ul>
+  <a href="/songs/new">Add your favorite lyrics!</a>
+<a class="songs-index-link" href="/songs">Browse Songs</a>
+
 </body>
 </html>
 
