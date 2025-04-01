@@ -1,105 +1,81 @@
-const app = express();
-const mongoose = require('mongoose');
+const dotenv = require('dotenv')
+dotenv.config()
+const express = require('express')
+const mongoose = require('mongoose')
 const methodOverride = require("method-override"); 
 const morgan = require("morgan");
+const path = require("path");
+const app = express()
+
+mongoose.connect(process.env.MONGODB_URI)
+mongoose.connection.on('connected', () =>{
+  console.log(`Connected to MongoDB ${mongoose.connection.name}`)
+})
 
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method")); 
 app.use(morgan("dev")); 
 
-
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", async (req, res) => {
-  res.render("index.ejs");
-});
 
-const dotenv = require("dotenv"); 
-dotenv.config(); 
-const express = require("express");
+const Song = require('./models/songs.js')
 
-const connect = async () => {
-mongoose.connect(process.env.MONGODB_URI);
-mongoose.connection.on("connected", () => {
-  console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
-});
+app.get('/Songs:songId/edit', async (req, res)=>{
+  const foundSongs = await Songs.findById(req.params.SongsId)
+  res.render('songs/edit.ejs')
+  Song: foundSongs
+})
 
-await mongoose.connect(process.env.MONGODB_URI)
-console.log('Connected to MongoDB')
-await runQueries()
-await mongoose.disconnect()
-console.log('Disconnected from MongoDB')
-}
-
-const Songs = require('./models/songs.js');
-const songs = require('./models/songs.js');
-
-
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
-});
-
-app.use(express.urlencoded({ extended: false }));
-
-
-app.post("/songs", async (req, res) => {
-  if (req.body.songs === "on") {
-    req.body.composer = true;
+app.put('/songs/:songId', async (req, res)=>{
+  if(req.body.isASong === 'on') {
+    req.body.isASong = true
+  } else {
+    req.body.isaSong = false
   }
-  await Songs.create(req.body);
-  res.redirect("/songs/new");
-});
+  await Song.findByIdAndUpdate(req.params.songId, req.body)
+  res.redirect('/songs')
+})
 
-app.get("/songs", async (req, res) => {
-  const allSongs = await Songs.find();
-  res.render("songs/index.ejs", { songs: allSongs });
-});
-
-
-app.get("/songs/:songsId", async (req, res) => {
-  const foundSongs = await Songs.findById(req.params.songsId);
-  res.render("songs/show.ejs", { songs: foundSongs });
-});
+app.get('/', async (req, res)=>{
+  res.render('index.ejs')
+})
 
 app.delete("/songs/:songsId", async (req, res) => {
   await Songs.findByIdAndDelete(req.params.fruitId);
   res.redirect("/songs");
 });
 
-app.get("/songs/:songsId/edit", async (req, res) => {
+app.get('/songs', async (req, res)=> {
+  const allSongs = await Song.find()
+  res.render('songs/index.ejs' , {
+    Song: allSongs
+  })
+})
+
+app.get("/songs/:songsId", async (req, res) => {
   const foundSongs = await Songs.findById(req.params.songsId);
-  res.render("songs/edit.ejs", {
-    songs: foundSongs,
-  });
+  res.render("songs/show.ejs", { songs: foundSongs });
 });
 
-app.put("/songs/:songsId", async (req, res) => {
-
-  if (req.body.isASong === "on") {
+app.post('/songs', async (req, res)=>{
+if (req.body.isASong === "on") {
     req.body.isASong = true;
   } else {
-    req.body.isAComposer = true;
+    req.body.isASong = false
   }
-  
-  
-  await Songs.findByIdAndUpdate(req.params.songsId, req.body);
-
-  res.redirect(`/songs/${req.params.songsId}`);
+  await Song.create(req.body);
+  res.redirect("/songs/");
 });
 
+app.get('songs/new', (req, res) =>{
+  res.render('/songs/new.ejs')
+})
 
-const runQueries = async () => {
-  console.log('Queries running. ')
-  const newSongsData = {
-    song: "Queen of the Night"
-    composer: "Mozart"
-  }
+app.listen(3000, ()=>{
+console.log('Listening on port 3000')
+})
 
-  await Songs.create{newSongsData}
-
-}
-
-connect()
 
 
 
