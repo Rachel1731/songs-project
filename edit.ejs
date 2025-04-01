@@ -6,24 +6,22 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
 <body>
-    <h1>Edit <%= song.name %></h1>
-
-<form action="/songs/<%=song._id%>?_method=PUT" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" />
-  
-    <label for="isASong">isASong?</label>
-    <input type="checkbox" name="isASong" id="isASong" />
-  
-    <button type="submit">Update Song</button>
-  </form>
-  <a href="/fruits">Back to Composers</a>
-</body>
-  
-  <form action="/fruits/<%=fruit._id%>?_method=PUT" method="POST"></form>
-
-  <input type="checkbox" name="isASong" />
-  <input type="checkbox" name="isAComposer" checked />
-  <input type="checkbox" name="isASongandComposer" <% if (song.isASong) { %>checked<% } %> >
+  <title>Edit Page</title>
+    <h1>Edit Songs <%=song.name%></h1>
+    <%=songs%>
+<form action="/songs/<%=song._id%>?_method=PUT" method="POST">>
+  <label for="name">Name:</label>
+  <input type="text" name="name" id="name" value="<%=song.name%>"/>
+  <label for="isASong">Is a Song</label>
+  <input 
+    name="isaSong"
+        type="checkbox"name="isASong" id="isASong" />
+       
+        <%if (song.isASong) { %>
+          checked
+       <% } %>
+<button type="submit">Update Song</button>
+  <a href="/songs">Back to Songs</a>
+</form>
 
 
