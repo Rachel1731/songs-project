@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title>Create a song here!</title>
-  </head>
-  <body>
-    <h1>Type your song</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title>Create a Song Here!</title>
+</head>
+<body>
+  <h1>Type Your Song</h1>
   <form action="/songs" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" name="name" id="name" />
-  
-      <label for="songs">music?</label>
-      <input type="checkbox" name="songs" id="composer" />
-  
-      <button type="submit">Add Song</button>
-    </form>
-  </body>
+    <label>Name:</label>
+    <input name="name" type="text" />
+    <label>Is a Song?</label>
+    <input name="isASong" type="checkbox" />
+    <button type="submit">Add Composer</button>
+  </form>
+  <a href="/songs/">Back to Composers</a>
+</body>
 </html>
