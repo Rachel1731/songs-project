@@ -8,17 +8,17 @@
   </head>
  <body>
     <h1><%= song.name %></h1>
-    <%=songs.isASong%>
+    <%=song.isASong%>
         <% if (song.isASong){ %>
   <p>This is a Song</p>
 <% } else { %>
         <p>This is not a Song</p>
 <% } %>
 <a href="/songs">Back to Composers</a>
-<form action = "/songs/<%=songs._id%>?_method=DELETE" method="POST">
+<form action = "/songs/<%=song._id%>?_method=DELETE" method="POST">
     <button type="submit">Delete <%song.name%></button>
 </form>
-<a href="/songs<%=songs._id%>/edit">Edit <%=song.name%></a>
+<a href="/songs<%=song._id%>/edit">Edit <%=song.name%></a>
 <a href="/songs">Back to Composers</a>
 </body>
 </html>
