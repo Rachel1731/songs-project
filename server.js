@@ -22,17 +22,17 @@ app.use(express.static(path.join(__dirname, "public")));
 const Song = require('./models/songs.js')
 
 app.get('/songs/:songId/edit', async (req, res)=>{
-  const foundSongs = await Songs.findById(req.params.songId)
-  res.render('/songs/edit.ejs'), {
-    song:foundSongs
-  }
+  const foundSongs = await Song.findById(req.params.songId)
+  console.log(foundSongs)
+  res.render('songs/edit.ejs', {
+    song: foundSongs
 })
-
+})
 app.put('/songs/:songId', async (req, res)=>{
   if(req.body.isASong === 'on') {
    req.body.isASong = true
   } else {
-    req.body.isaSong = false
+    req.body.isASong = false
   }
   await Song.findByIdAndUpdate(req.params.songId, req.body)
   res.redirect('/songs')
@@ -43,7 +43,7 @@ app.get('/', async (req, res)=>{
 })
 
 app.delete("/songs/:songId", async (req, res) => {
-  await Songs.findByIdAndDelete(req.params.songId);
+  await Song.findByIdAndDelete(req.params.songId);
   res.redirect("/songs");
 });
 
@@ -78,18 +78,3 @@ app.get("/songs/:songId", async (req, res) => {
 app.listen(3000, ()=>{
 console.log('Listening on port 3000')
 })
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-  
