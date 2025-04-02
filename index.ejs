@@ -4,23 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/style.css" />
-  <title>Music App</title>
+  <title>Music app</title>
 </head>
 <body>
   <h1>Welcome to the Music app!</h1>
 
   <img
   class="Music-2048x1364"
-  src="Music-2048x1364.jpg"
+  src="Music-2048x1364-1.jpg"
   alt="colorful music notes"
-
-  
+/>
   <ul>
     <%songs.forEach((song)=>{ %>
-     <li>
-      <a href="/songs/<%songs._id%>">
-        <%songs._id%>/li><%
-        </a>
+     <li> 
+      <a href="/songs/<%= song._id%>">
+        <%= song.name%>
+        </a> 
         </li>
 <% }) %>
   </ul>
@@ -29,5 +28,6 @@
 
 </body>
 </html>
+
 
 
